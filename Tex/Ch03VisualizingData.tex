@@ -1,1 +1,52 @@
 \chapter{Visualizing Data}
+There are two primary uses for data visualization:
+\begin{itemize}
+    \item To explore data
+    \item To communicate data
+\end{itemize}
+
+\section{Bar Charts}
+A bar chart is a good choice when you want to show how some quantity
+varies among some discrete set of items.
+
+A bar chart can also be a good choice for plotting histograms of bucketed
+numeric values in order to visually explore how the values
+are distributed.
+
+Be judicious when using plt.axis. When creating bar charts it is
+considered especially bad form for your y-axis not to start at 0, since this is
+an easy way to mislead people (\autoref{A chart with a misleading y-axis})
+
+\figures{A chart with a misleading y-axis}
+
+\section{Line Charts}
+
+We can make line charts using plt.plot. These are a
+good choice for showing trends.
+\section{Scatterplots}
+A scatterplot is the right choice for visualizing the relationship between two
+paired sets of data.
+
+If you’re scattering comparable variables, you might get a misleading
+picture if you let matplotlib choose the scale. If we include a call to \verb|plt.axis("equal")|, the plot (\autoref{User comparable scale in scatterplot}) more
+accurately shows that most of the variation occurs on test 2.
+
+\subfigures{A scatterplot with uncomparable axes}{The same scatterplot with equal axes}{User comparable scale in scatterplot}
+
+\section{For Further Exploration}
+\begin{itemize}
+    \item The \href{https://matplotlib.org/stable/}{matplotlib Gallery} will give you a good idea of the sorts of
+          things you can do with matplotlib (and how to do them).
+    \item \href{https://seaborn.pydata.org/}{seaborn} is built on top of matplotlib and allows you to easily
+          produce prettier (and more complex) visualizations.
+    \item \href{https://altair-viz.github.io/}{Altair} is a newer Python library for creating declarative
+          visualizations.
+    \item \href{https://d3js.org/}{D3.js} is a JavaScript library for producing sophisticated interactive
+          visualizations for the web. Although it is not in Python, it is widely
+          used, and it is well worth your while to be familiar with it.
+    \item \href{https://docs.bokeh.org/en/latest/}{Bokeh} is a library that brings D3-style visualizations into Python.
+\end{itemize}
+
+
+
+
