@@ -1,0 +1,24 @@
+\chapter{Probability}
+\section{Continuous Distributions}
+
+\section{The Normal Distribution}
+The normal distribution is the classic bell curve–shaped distribution and is com‐
+pletely determined by two parameters: its mean μ (mu) and its standard deviation σ
+(sigma). The mean indicates where the bell is centered, and the standard deviation
+how “wide” it is.
+
+It has the PDF:
+\begin{equation*}
+    f(x|\mu, \sigma)=\frac{1}{\sqrt{2\pi}\sigma}\exp(-
+    \frac{(x-\mu)^2}{2\sigma^2})
+\end{equation*}
+
+When$\mu = 0$ and $\sigma = 1$, it’s called the standard normal distribution. If $Z$ is a standard
+normal random variable, then it turns out that:
+$$X = \sigma Z + \mu$$
+is also normal but with mean $\mu$ and standard deviation $\sigma$. Conversely, if X is a normal
+random variable with mean $\mu$ and standard deviation $\sigma$,
+$$Z = X - \mu /\sigma$$
+is a standard normal variable.
+The CDF for the normal distribution cannot be written in an “elementary” manner,
+but we can write it using Python’s \verb|math.erf| \href{https://en.wikipedia.org/wiki/Error_function}{error function}:
