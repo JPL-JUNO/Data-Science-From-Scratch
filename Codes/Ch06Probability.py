@@ -58,3 +58,46 @@ def inverse_normal_cdf(p: float,
         else:
             hi_z = mid_z
     return mid_z
+
+# The Central Limit Theorem
+# 中心极限定理
+
+
+import random
+
+
+def bernoulli_trial(p: float) -> int:
+    '''
+    return 1 with probability p and 0 with probability 1-p
+    '''
+    return 1 if random.random() < p else 0
+
+
+def binomial(n: int, p: float) -> int:
+    '''
+    return the sum of n bernoulli(p) trails
+    '''
+    return sum(bernoulli_trial(p) for _ in range(n))
+
+
+from collections import Counter
+
+
+def binomial_histogram(p: float, n: int, num_points: int) -> None:
+    '''
+    pick points from a Binomial(n, p) and plots their histogram
+    '''
+    data = [binomial(n, p) for _ in range(num_points)]
+
+    histogram = Counter(data)
+    plt.bar([x - .4 for x in histogram.keys()],
+            [v / num_points for v in histogram.values()],
+            .8, color='.75')
+    mu = p * n
+    sigma = math.sqrt(n * p * (1 - p))
+    xs = range(min(data), max(data) + 1)
+    ys = [normal_cdf(i + .5, mu, sigma) -
+          normal_cdf(i - .5, mu, sigma) for i in xs]
+    plt.plot(xs, ys)
+    plt.title('Binomial Distributions vs. Normal Approximation')
+    plt.show()
