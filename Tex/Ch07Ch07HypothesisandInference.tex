@@ -1,0 +1,57 @@
+\chapter{Hypothesis and Inference}
+\section{Example: Flipping a Coin}
+We are also often interested in the \emph{power}(势) of a test, which is the probability of not
+making a \emph{type 2 error} (“false negative”), in which we fail to reject $H_0$ even though it's
+false.
+\section{p-Values}
+An alternative way of thinking about the preceding test involves p-values. Instead of
+choosing bounds based on some probability cutoff, we compute the probability—
+assuming $H_0$ is true—that we would see a value at least as extreme as the one we
+actually observed.
+
+\begin{tcolorbox}
+    Why did we use a value of 529.5 rather than using 530? This is
+    what's called a \href{https://en.wikipedia.org/wiki/Continuity_correction}{continuity correction}. It reflects the fact that nor
+    \verb|mal_probability_between(529.5, 530.5, mu_0, sigma_0)| is a
+    better estimate of the probability of seeing 530 heads than nor
+    \verb|mal_probability_between(530, 531, mu_0, sigma_0)| is.
+\end{tcolorbox}
+\section{Confidence Intervals}
+We've been testing hypotheses about the value of the heads probability p, which is a
+parameter of the unknown “heads” distribution. When this is the case, a third
+approach is to construct a \emph{confidence interval} around the observed value of the
+parameter.
+
+\section{p-Hacking}
+\section{Example: Running an A/B Test}
+假设：\\
+One of
+your advertisers has developed a new energy drink targeted at data scientists, and the
+VP of Advertisements wants your help choosing between advertisement A (“tastes
+great!”) and advertisement B (“less bias!”).
+
+
+Let's say that $N_A$ people see ad A, and that $n_A$ of them click it. We can think of each ad
+view as a Bernoulli trial where $p_A$ is the probability that someone clicks ad A. Then (if
+$N_A$ is large, which it is here) we know that $n_A/N_A$ is approximately a normal random
+variable with mean $p_A$ and standard deviation $\sigma_A =
+    \sqrt{p_A(1 - p_A)/N_A}$.
+
+Similarly, $n_B/N_B$ is approximately a normal random variable with mean $p_B$ and standard deviation $\sigma_B =
+    \sqrt{p_B(1 - p_B)/N_B}$.
+
+If we assume those two normals are independent (which seems reasonable, since the
+individual Bernoulli trials ought to be), then their difference should also be normal
+with mean $p_B - p_A$ and standard deviation $\sigma_A^2 + \sigma_B^2$.
+\begin{tcolorbox}
+    This is sort of cheating. The math only works out exactly like this if
+    you know the standard deviations. Here we're estimating them
+    from the data, which means that we really should be using a t-distribution. But for large enough datasets, it's close enough that it
+    doesn't make much of a difference.
+\end{tcolorbox}
+
+\section{Bayesian Inference}
+An alternative approach to inference involves treating the unknown parameters
+themselves as random variables. The analyst (that’s you) starts with a \emph{prior distribution} for the parameters and then uses the observed data and Bayes’s theorem to get an
+updated \emph{posterior distribution} for the parameters. Rather than making probability
+judgments about the tests, you make probability judgments about the parameters.

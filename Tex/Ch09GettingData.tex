@@ -1,0 +1,15 @@
+\chapter{Getting Data}
+\section{stdin and stdout}
+If you run your Python scripts at the command line, you can pipe data through them
+using \verb|sys.stdin| and \verb|sys.stdout|.
+
+在Windows中的命令行可以输入：
+\begin{pyc}
+    type line_count.txt | python egrep.py "[0-9]"
+    type line_count.txt | python line_count.py
+    type line_count.txt | python egrep.py "[0-9]" | python line_count.py
+\end{pyc}
+
+The $\mid$ is the pipe character, which means “use the output of the left command as the
+input of the right command.” You can build pretty elaborate data-processing pipelines
+this way.

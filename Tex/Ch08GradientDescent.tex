@@ -1,0 +1,43 @@
+\chapter{Gradient Descent}
+Frequently when doing data science, we’ll be trying to the find the best model for a
+certain situation. And usually “best” will mean something like “minimizes the error
+of its predictions” or “maximizes the likelihood of the data.” In other words, it will
+represent the solution to some sort of optimization problem.
+
+Our approach will be a technique called \emph{gradient descent}, which lends itself pretty well to a from-scratch treatment.
+
+\section{The Idea Behind Gradient Descent}
+The gradient (如果可微) gives the input direction in which the function most quickly increases.
+
+\section{Estimating the Gradient}
+If \verb|f| is a function of one variable, its derivative at a point \verb|x| measures how \verb|f(x)|
+changes when we make a very small change to \verb|x|.
+
+When \verb|f| is a function of many variables, it has multiple partial derivatives, each indicating how \verb|f| changes when we make small changes in just one of the input variables.
+
+\section{Choosing the Right Step Size}
+Although the rationale for moving against the gradient is clear, how far to move is not.
+Indeed, choosing the right step size is more of an art than a science. Popular
+options include:
+\begin{itemize}
+    \item Using a fixed step size
+    \item Gradually shrinking the step size over time
+    \item At each step, choosing the step size that minimizes the value of the objective function
+\end{itemize}
+\section{Using Gradient Descent to Fit Models}
+For the whole dataset we’ll look at the \emph{mean squared error}(MSE). \important{And the gradient of the mean squared error is just the mean
+    of the individual gradients.}
+
+\section{Minibatch and Stochastic Gradient Descent}
+One drawback of the preceding approach is that we had to evaluate the gradients on the entire dataset before we could take a gradient step and update our parameters. 计算代价太大，尤其是对大型数据集。
+
+We can do this using a technique called \emph{minibatch gradient descent}, in which we compute the gradient (and take a gradient step) based on a “minibatch” sampled from the larger dataset.
+
+\begin{tcolorbox}
+    The \verb|TypeVar(T)| allows us to create a “generic” function. It says that
+    our dataset can be a list of any single type—strs, ints, lists,
+    whatever—but whatever that type is, the outputs will be batches of
+    it.
+\end{tcolorbox}
+
+Another variation is \emph{stochastic gradient descent}(SGD), in which you take gradient steps based on one training example at a time
