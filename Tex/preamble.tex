@@ -79,6 +79,11 @@
 
 \tcbuselibrary{minted, skins, breakable}
 \tcbset{breakable, colframe=green!90!black,colback=green!5, sharp corners=all}
+\newcommand\warnings[1]{
+    \begin{tcolorbox}[colframe=red!90, colback=red!10]
+        #1
+    \end{tcolorbox}
+}
 % \newtcblisting[auto counter, number within =chapter]{py}[1]{listing engine=minted,
 % 	minted style=colorful,
 % 	minted language=python,

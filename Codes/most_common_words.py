@@ -12,4 +12,7 @@ counter = Counter(word.lower() for line in sys.stdin
                   if word)
 
 for word, count in counter.most_common(num_words):
-    sys.stout.write(str(count))
+    sys.stdout.write(str(count))
+    sys.stdout.write('\t')
+    sys.stdout.write(word)
+    sys.stdout.write('\n')
