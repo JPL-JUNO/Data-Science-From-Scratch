@@ -69,3 +69,44 @@ def correlation_matrix(data: List[Vector]) -> Matrix:
         return correlation(data[i], data[j])
 
     return make_matrix(len(data), len(data), correlation_ij)
+
+
+from typing import NamedTuple
+import datetime
+
+
+class StockPrice(NamedTuple):
+    symbol: str
+    date: datetime.date
+    closing_price: float
+
+    def is_high_tech(self) -> bool:
+        """
+        这是一个类， 因此可以添加它的方法
+        """
+        return self.symbol in ['MSFT', 'GOOG', 'FB', 'AMZN', 'AAPL']
+
+
+price = StockPrice('MSFT', datetime.date(2018, 12, 14), 106.03)
+
+assert price.symbol == 'MSFT'
+assert price.closing_price == 106.03
+assert price.is_high_tech()
+
+
+from dataclasses import dataclass
+
+
+@dataclass
+class StockPrice2:
+    symbol: str
+    date: datetime.date
+    closing_price: float
+
+    def is_high_tech(self) -> bool:
+        """_summary_
+
+        Returns:
+            bool: _description_
+        """
+        return self.symbol in ['MSFT', 'GOOG', 'FB', 'AMZN', 'AAPL']

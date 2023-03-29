@@ -19,8 +19,31 @@ another. A simple approach is to look at the \emph{correlation matrix}, in which
 row $i$ and column $j$ is the correlation between the ith dimension and the jth dimension of the data.
 
 
-A more visual approach (\notes{if you don’t have too many dimensions}) is to make a scatterplot matrix \autoref{Scatterplot matrix} showing all the pairwise scatterplots.
+A more visual approach (\notes{if you don't have too many dimensions}) is to make a scatterplot matrix \autoref{Scatterplot matrix} showing all the pairwise scatterplots.
 
 \figures{Scatterplot matrix}
 
 \section{Using NamedTuples}
+
+One common way of representing data is using dicts. There are several reasons why this is less than ideal, however. This is a slightly inefficient representation (a dict involves some overhead), so that if you have a lot of data they'll take up more memory than they have to. For the most part, this is a
+minor consideration. A larger issue is that accessing things by dict key is error-prone. Finally, while we can type-annotate uniform dictionaries, there's no helpful way to annotate dictionaries-as-data that have lots of different value
+types.
+
+As an alternative, Python includes a \href{https://docs.python.org/3/library/collections.html#collections.namedtuple}{namedtuple} (Returns a new tuple subclass named typename. ) class, which is like a tuple but with
+named slots. Like regular tuples, namedtuples are immutable, which means that you can't modify
+their values once they're created. (不能修改)
+
+You'll notice that we still haven't solved the type annotation issue. We do that by using
+the typed variant, NamedTuple. namedtuple子类仍然不能解决代码提示问题
+
+\section{Dataclasses}
+Dataclasses are (sort of) a mutable version of NamedTuple. (“sort of” because
+NamedTuples represent their data compactly as tuples, whereas dataclasses are regular
+Python classes that simply generate some methods for you automatically.)
+
+The syntax is very similar to NamedTuple. But instead of inheriting from a base class,
+we use a decorator. The big difference is that we can modify a dataclass instance's values.
+If we tried to modify a field of the NamedTuple version, we'd get an \verb|AttributeError|.
+
+This also leaves us susceptible to the kind of errors we were hoping to avoid by not
+using dicts.
