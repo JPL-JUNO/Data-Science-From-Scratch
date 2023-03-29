@@ -1,0 +1,26 @@
+\chapter{Working with Data}
+\section{Exploring Your Data}
+After you've identified the questions you're trying to answer and have gotten your
+hands on some data, you might be tempted to dive in and immediately start building
+models and getting answers. But you should resist this urge. Your first step should be
+to explore your data.
+\subsection{Exploring One-Dimensional Data}
+An obvious first step is to compute a few summary statistics. You'd like to know how
+many data points you have, the smallest, the largest, the mean, and the standard deviation.
+
+But even these don't necessarily give you a great understanding. A good next step is to
+create a histogram, in which you group your data into discrete buckets and count how
+many points fall into each bucket.
+
+\subsection{Two Dimensions}
+\subsection{Many Dimensions}
+With many dimensions, you'd like to know how all the dimensions relate to one
+another. A simple approach is to look at the \emph{correlation matrix}, in which the entry in
+row $i$ and column $j$ is the correlation between the ith dimension and the jth dimension of the data.
+
+
+A more visual approach (\notes{if you don’t have too many dimensions}) is to make a scatterplot matrix \autoref{Scatterplot matrix} showing all the pairwise scatterplots.
+
+\figures{Scatterplot matrix}
+
+\section{Using NamedTuples}
