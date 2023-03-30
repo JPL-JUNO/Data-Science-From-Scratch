@@ -37,7 +37,7 @@ You'll notice that we still haven't solved the type annotation issue. We do that
 the typed variant, NamedTuple. namedtuple子类仍然不能解决代码提示问题
 
 \section{Dataclasses}
-Dataclasses are (sort of) a mutable version of NamedTuple. (“sort of” because
+Dataclasses are (sort of) a mutable version of NamedTuple. (``sort of'' because
 NamedTuples represent their data compactly as tuples, whereas dataclasses are regular
 Python classes that simply generate some methods for you automatically.)
 
@@ -47,3 +47,47 @@ If we tried to modify a field of the NamedTuple version, we'd get an \verb|Attri
 
 This also leaves us susceptible to the kind of errors we were hoping to avoid by not
 using dicts.
+
+\section{Cleaning and Munging}
+\section{Manipulating Data}
+One of the most important skills of a data scientist is \emph{manipulating data}.
+
+\section{Rescaling}
+Many techniques are sensitive to the \emph{scale} of your data. (尤其是涉及距离计算的时候)
+
+Obviously it's a problem if changing units can change results like this. For this reason,
+when dimensions aren't comparable with one another, we will sometimes rescale our
+data so that each dimension has mean 0 and standard deviation 1. This effectively
+gets rid of the units, converting each dimension to ``standard deviations from the
+mean.''
+
+\section{An Aside: tqdm}
+Frequently we'll end up doing computations that take a long time. When you're doing such work, you'd like to know that you're making progress and how long you should
+expect to wait. One way of doing this is with the tqdm library, which generates custom progress bars.
+
+There are only a few features you need to know about.
+\begin{enumerate}
+    \item an iterable wrapped in \verb|tqdm.tqdm| will produce a progress bar. In this case (where we are just wrapping a call to range) you can just use \verb|tqdm.trange|.
+    \item You can also set the description of the progress bar while it's running. To do that, you
+          need to capture the tqdm iterator in a with statement.
+    \item Using tqdm will occasionally make your code flaky—sometimes the screen redraws
+          poorly, and sometimes the loop will simply hang. And if you accidentally wrap a tqdm
+          loop inside another tqdm loop, strange things might happen. Typically its benefits
+          outweigh these downsides, though, so we'll try to use it whenever we have slow-
+          running computations.
+\end{enumerate}
+
+\section{Dimensionality Reduction}
+Sometimes the ``actual'' (or useful) dimensions of the data might not correspond to the dimensions we have. When this is the case, we can use a technique called principal component analysis
+(PCA) to extract one or more dimensions that capture as much of the variation in the
+data as possible.
+
+\begin{tcolorbox}
+    In practice, you wouldn't use this technique on such a low-
+    dimensional dataset. Dimensionality reduction is mostly useful
+    when your dataset has a large number of dimensions and you want
+    to find a small subset that captures most of the variation.
+\end{tcolorbox}
+
+As a first step, we'll need to translate the data so that each dimension has mean 0. If we don't do this, our techniques are likely to identify the mean itself rather than
+the variation in the data.
