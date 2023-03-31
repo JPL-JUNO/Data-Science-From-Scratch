@@ -66,3 +66,36 @@ assert len(x_test) == len(y_test) == 250
 # Check that the corresponding data points are paired correctly
 assert all(y == 2 * x for x, y in zip(x_train, y_train))
 assert all(y == 2 * x for x, y in zip(x_test, y_test))
+
+
+def accuracy(tp: int, fp: int, fn: int, tn: int) -> float:
+    """_summary_
+
+    Args:
+        tp (int): _description_
+        fp (int): _description_
+        fn (_type_): _description_
+
+    Returns:
+        float: _description_
+    """
+    correct = tp + tn
+    total = tp + fp + fn + tn
+    return correct / total
+
+
+assert accuracy(70, 4930, 13930, 981070) == .98114
+
+
+def recall(tp: int, fp: int, fn: int, tn: int) -> float:
+    return tp / (tp + fn)
+
+
+assert recall(70, 4930, 13930, 981070) == 0.005
+
+
+def precision(tp: int, fp: int, fn: int, tn: int) -> float:
+    return tp / (tp + fp)
+
+
+assert precision(70, 4930, 13930, 981070) == 0.014
